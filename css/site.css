@@ -1,6 +1,6 @@
 :root{
-    --primary-color: #1d5888;
-    --secondary-color: #ff993b;
+    --primary-color: #027777;
+    --secondary-color: #0dc197;
     --dark-color: #1d1c1c;
     --white-color: #e7e7e7;
 }
@@ -11,6 +11,14 @@ body{
 
 nav{
     background-color: var(--dark-color);
+}
+
+.rightHeadingUnderline{
+    border-right: 1px solid var(--primary-color);
+}
+
+.bottomHeadingUnderline{
+    border-bottom: 1px solid var(--primary-color);
 }
 
 footer{
@@ -80,4 +88,16 @@ main>.container {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.FizzBuzz{
+    color: red;
+}
+
+.Buzz{
+    color: green;
+}
+
+.Fizz{
+    color: blue;
 }
