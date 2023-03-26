@@ -67,12 +67,13 @@ function displayFizzBuzz(numbers){
             boldOrNot = 1;
 
         }else{
+            // just a number
             answer = tempNumber.toString();
         }
         
-        if(boldOrNot == 1){
+        if(boldOrNot == 1){ // display in bold
             tempTemplate += `<td class = ${className}><strong>${answer}</strong></td>`;
-        }else{
+        }else{ // normal display
             tempTemplate += `<td>${answer}</td>`;
         }
         
@@ -85,6 +86,7 @@ function displayFizzBuzz(numbers){
         }
     }
 
+    // the next 3 lines of code are to handle the last entries which might be less than multiple of 5, and therefore missed by the if statement at the end of the for loop above.
     let tempStr = `<tr>${tempTemplate}</tr>`;
     templateRows += tempStr;
     tempTemplate = ``;

@@ -59,7 +59,7 @@
     <!-- MAIN Section -->
     <main class="flex-shrink-0">
        <div class="container px-4 py-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark">
+        <h2 class="bottomHeadingUnderline border-2">
             The Code For FIZZ BUZZ.
         </h2>
            <div class="row row-cols-1 row-cols-lg-2">
@@ -67,9 +67,105 @@
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            // Call HelloWorld
-                            function HelloWorld(){
-                                alert("Hello World");
+                            // fucntion to getValues
+                            function getValues(){
+
+                                //get values
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+
+                                if( (Number.isInteger(startValue) && Number.isInteger(endValue)) && (startValue <= endValue)){
+                                    // create array within the range
+                                    let numbers = generateNumbers(startValue, endValue);
+
+                                    //display on th UI
+                                    displayFizzBuzz(numbers);
+                                }else{
+                                    alert("Enter the correct integer values.")
+                                }
+
+                            }
+
+
+                            // function to generate numbers in the range
+                            function generateNumbers(startValue, endValue){
+                                let numbers = [];
+
+                                // fill the array with numbers in the range of [startValue, endValue]
+                                for(let i = startValue; i <= endValue; i++){
+                                    numbers.push(i);
+                                }
+
+                                return numbers;
+                            }
+
+
+                            // function to display Fizz, Buzz or FizzBuzz
+                            function displayFizzBuzz(numbers){
+                                let templateRows = "";
+                                let tempTemplate = ``;
+
+                                // iterate over the numbers
+                                for(let i = 0; i < numbers.length; i++){
+                                    let tempNumber = numbers[i];
+
+                                    let answer = "";
+                                    let className = "";
+
+                                    let boldOrNot = 0;
+
+                                    if(tempNumber % 15 == 0){
+                                        // display Fizz Buzz
+                                        answer = "FizzBuzz";
+                                        className = "FizzBuzz";
+                                        boldOrNot = 1;
+                                        
+                                    }else if(tempNumber % 5 == 0){
+                                        // display Buzz
+                                        answer = "Buzz";
+                                        className = "Buzz";
+                                        boldOrNot = 1;
+
+                                    }else if(tempNumber % 3 == 0){
+                                        // display Fizz
+                                        answer = "Fizz";
+                                        className = "Fizz";
+                                        boldOrNot = 1;
+
+                                    }else{
+                                        // just a number
+                                        answer = tempNumber.toString();
+                                    }
+                                    
+                                    if(boldOrNot == 1){ // display in bold
+                                        // see the Git Repo
+                                        tempTemplate += `<td class = ${className}><strong>${answer}</strong></td>`;
+                                    }else{ // normal display
+                                        // see the Git Repo
+                                        tempTemplate += `<td>${answer}</td>`;
+                                    }
+                                    
+
+                                    // if 5 numbers are encountered so far, put them in one row
+                                    if( (i+1) % 5 == 0 ){
+                                        // see the Git Repo
+                                        let tempStr = `<tr>${tempTemplate}</tr>`;
+                                        templateRows += tempStr;
+                                        tempTemplate = ``;
+                                    }
+                                }
+
+                                // the next 3 lines of code are to handle the last entries which might be less than multiple of 5, and therefore missed by the if statement at the end of the for loop above.
+                                // see the Git Repo
+                                let tempStr = `<tr>${tempTemplate}</tr>`;
+                                templateRows += tempStr;
+                                tempTemplate = ``;
+
+                                // update to the UI
+                                document.getElementById("results").innerHTML = templateRows;
                             }
                         </code>
                     </pre>
@@ -78,9 +174,41 @@
                 <!-- DESCRIPTION -->
                 <div class="col-lg-4">
                     <p>The code is strucutred in the box and next to it is the description of the code.</p>
+                    
+                    <hr class="bottomHeadingUnderline">
 
-                    <h5>Hello World</h5>
-                    <p>Hello world is afunction that displays an alert generated "Hello World" whenever this function is called.</p>
+                    <h5>Function: getValues</h5>
+                    <p>
+                        This function is responsible for getting the input values for the start and end of the range for the FizzBuzz from the UI via DOM manipulation. Then these values are checked for correctness: they should be integers and endValue should be greater than or equal to startValue. Once verified, then the program proceeds to generating the numbers within the range and storing them in an array, and then displaying them on th UI.
+                    </p>
+
+                    <hr class="bottomHeadingUnderline">
+
+                    <h5>Function: generateNumbers</h5>
+                    <p>
+                        This function is responsible for generating the nubers within the range startValue and endValue (bioth inclusive) and returning the generated numbers in stored in an array.
+                    </p>
+
+                    <hr class="bottomHeadingUnderline">
+
+                    <h5>Function: displayFizzBuzz</h5>
+                    <p>
+                        This function is responsible for going over all the numbers stored in the provided array and implementing FizzBuzz logic, which is:
+                        <ul>
+                            <li>
+                                if multiple of 3 => display <p class="Fizz"><strong>Fizz</strong></p>
+                            </li>
+                            <li>
+                                if multiple of 5 => display <p class="Buzz"><strong>Buzz</strong></p>
+                            </li>
+                            <li>
+                                if multiple of 15 (or 3 and 5) => display <p class="FizzBuzz"><strong>FizzBuzz</strong></p>
+                            </li>
+                            <li>
+                                else => display the number
+                            </li>
+                        </ul>
+                    </p>
 
                 </div>
            </div>
